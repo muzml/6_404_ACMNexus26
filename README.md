@@ -26,7 +26,7 @@ A **16-hour hackathon** across various domains where innovation meets execution.
 <Your Project Name>
 
 ### 🎯 Chosen Domain:
-<Digital Health & Predictive Care Systems>
+Digital Health & Predictive Care Systems
 
 ### ❗ Problem Statement:
 <What problem are you solving?>
