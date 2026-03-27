@@ -9,6 +9,7 @@ const NAV_ITEMS = [
   { id: 'vitals',    icon: HeartPulse,     label: 'Vitals' },
   { id: 'signals',   icon: Activity,       label: 'Signals' },
   { id: 'alerts',    icon: AlertTriangle,  label: 'Alerts' },
+  { id: 'pupillary', icon: Zap,            label: 'Pupillary Response' },
   { id: 'assistant', icon: Bot,            label: 'AI Assistant' },
 ];
 

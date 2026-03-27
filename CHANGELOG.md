@@ -13,7 +13,23 @@
 ### Issues Faced
 - None
 
-## 12:47
+## 16:00
+
+### Features Added
+- Added Pupillary Response test feature and tab in sidebar
+- Added `frontend/src/pages/PupillaryPage.jsx` with webcam capture, white flash, and latency analysis
+- Integrated `pupillary` page route into `frontend/src/App.jsx`
+
+### Files Modified
+- frontend/src/components/Sidebar.jsx
+- frontend/src/App.jsx
+- frontend/src/pages/PupillaryPage.jsx
+- CHANGELOG.md
+
+### Issues Faced
+- None
+
+## 11:47
 
 ### Features Added
 - Added local template image assets (template_acm.png, template_clique.png)

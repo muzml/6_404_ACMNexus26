@@ -12,6 +12,7 @@ import AlertsPage from './pages/AlertsPage';
 import AIAssistantPage from './pages/AIAssistantPage';
 import NotificationsPage from './pages/NotificationsPage';
 import SettingsPage from './pages/SettingsPage';
+import PupillaryPage from './pages/PupillaryPage';
 import './index.css';
 import './App.css';
 
@@ -56,6 +57,8 @@ function App() {
         return <AlertsPage alerts={data?.alerts || []} />;
       case 'assistant':
         return <AIAssistantPage recommendations={data?.recommendations || []} />;
+      case 'pupillary':
+        return <PupillaryPage />;
       case 'notifications':
         return <NotificationsPage />;
       case 'settings':
