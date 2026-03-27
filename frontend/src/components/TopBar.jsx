@@ -1,18 +1,29 @@
 import React from 'react';
 import { RefreshCw, Wifi, WifiOff, Clock } from 'lucide-react';
 
-export default function TopBar({ lastUpdated, loading, onRefresh }) {
+const PAGE_META = {
+  dashboard:     { title: 'Vital Dashboard',    subtitle: 'Real-time health monitoring & AI risk analysis' },
+  vitals:        { title: 'Vitals Overview',     subtitle: 'Detailed metrics for all monitored health parameters' },
+  signals:       { title: 'Signal Streams',      subtitle: 'Live biosignal data and historical trend analysis' },
+  alerts:        { title: 'Risk Alerts',         subtitle: 'Active risk signals and anomaly detections' },
+  assistant:     { title: 'AI Assistant',        subtitle: 'Chat with CureAI for personalized health insights' },
+  notifications: { title: 'Notifications',       subtitle: 'Recent alerts, updates and system events' },
+  settings:      { title: 'Settings',            subtitle: 'Manage your profile, preferences and thresholds' },
+};
+
+export default function TopBar({ activeSection = 'dashboard', lastUpdated, loading, onRefresh }) {
   const timeStr = lastUpdated
     ? lastUpdated.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })
     : '--:--:--';
+  const meta = PAGE_META[activeSection] ?? PAGE_META.dashboard;
 
   return (
     <header style={styles.topbar}>
       {/* Left: Title */}
       <div style={styles.left}>
         <div style={styles.dot} />
-        <span style={styles.title}>Vital Dashboard</span>
-        <span style={styles.subtitle}>Real-time health monitoring & AI risk analysis</span>
+        <span style={styles.title}>{meta.title}</span>
+        <span style={styles.subtitle}>{meta.subtitle}</span>
       </div>
 
       {/* Center: Status */}

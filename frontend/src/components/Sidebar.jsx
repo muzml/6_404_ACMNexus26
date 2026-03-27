@@ -58,8 +58,16 @@ export default function Sidebar({ activeSection, setActiveSection }) {
       {/* Bottom items */}
       <div style={styles.bottomNav}>
         {BOTTOM_ITEMS.map(({ id, icon: Icon, label }) => (
-          <button key={id} style={styles.navItemBottom} title={label}>
-            <Icon size={17} strokeWidth={1.8} />
+          <button
+            key={id}
+            style={{
+              ...styles.navItemBottom,
+              ...(activeSection === id ? styles.navItemActive : {}),
+            }}
+            onClick={() => setActiveSection(id)}
+            title={label}
+          >
+            <Icon size={17} strokeWidth={activeSection === id ? 2.5 : 1.8} />
             <span>{label}</span>
           </button>
         ))}

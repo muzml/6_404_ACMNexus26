@@ -6,6 +6,12 @@ import SignalStreams from './components/SignalStreams';
 import RiskScore from './components/RiskScore';
 import RiskSignals from './components/RiskSignals';
 import AIAssistant from './components/AIAssistant';
+import VitalsPage from './pages/VitalsPage';
+import SignalsPage from './pages/SignalsPage';
+import AlertsPage from './pages/AlertsPage';
+import AIAssistantPage from './pages/AIAssistantPage';
+import NotificationsPage from './pages/NotificationsPage';
+import SettingsPage from './pages/SettingsPage';
 import './index.css';
 import './App.css';
 
@@ -39,35 +45,53 @@ function App() {
     return () => clearInterval(interval);
   }, [fetchData]);
 
+  const renderPage = () => {
+    if (loading) return <LoadingState />;
+    switch (activeSection) {
+      case 'vitals':
+        return <VitalsPage vitals={data?.vitals} />;
+      case 'signals':
+        return <SignalsPage timestamps={data?.timestamps} signals={data?.signals} />;
+      case 'alerts':
+        return <AlertsPage alerts={data?.alerts || []} />;
+      case 'assistant':
+        return <AIAssistantPage recommendations={data?.recommendations || []} />;
+      case 'notifications':
+        return <NotificationsPage />;
+      case 'settings':
+        return <SettingsPage />;
+      default: // 'dashboard'
+        return (
+          <>
+            <div className="dashboard-grid">
+              <VitalDashboard vitals={data?.vitals} />
+            </div>
+            <SignalStreams
+              timestamps={data?.timestamps}
+              signals={data?.signals}
+            />
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: '1fr 1fr 1.1fr',
+              gap: 18,
+              minHeight: 0,
+            }}>
+              <RiskSignals alerts={data?.alerts || []} />
+              <AIAssistant recommendations={data?.recommendations || []} />
+              <RiskScore riskScore={data?.risk_score} />
+            </div>
+          </>
+        );
+    }
+  };
+
   return (
     <div className="app-layout">
       <Sidebar activeSection={activeSection} setActiveSection={setActiveSection} />
       <div className="main-area">
-        <TopBar lastUpdated={lastUpdated} loading={loading} onRefresh={fetchData} />
+        <TopBar activeSection={activeSection} lastUpdated={lastUpdated} loading={loading} onRefresh={fetchData} />
         <main className="main-content">
-          {loading ? (
-            <LoadingState />
-          ) : (
-            <>
-              <div className="dashboard-grid">
-                <VitalDashboard vitals={data?.vitals} />
-              </div>
-              <SignalStreams
-                timestamps={data?.timestamps}
-                signals={data?.signals}
-              />
-              <div style={{
-                display: 'grid',
-                gridTemplateColumns: '1fr 1fr 1.1fr',
-                gap: 18,
-                minHeight: 0,
-              }}>
-                <RiskSignals alerts={data?.alerts || []} />
-                <AIAssistant recommendations={data?.recommendations || []} />
-                <RiskScore riskScore={data?.risk_score} />
-              </div>
-            </>
-          )}
+          {renderPage()}
         </main>
       </div>
     </div>
